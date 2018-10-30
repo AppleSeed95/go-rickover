@@ -1,8 +1,10 @@
 language: go
+go_import_path: github.com/Shyp/go-types
 
 go:
-  - 1.5
-  - 1.6
-  - tip
+  - 1.9.x
+  - master
 
-script: make install lint race-test
+before_script: go get ./...
+
+script: make lint race-test

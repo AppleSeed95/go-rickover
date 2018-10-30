@@ -53,7 +53,7 @@ var sampleJob = models.Job{
 
 func newJob(t *testing.T) models.Job {
 	t.Helper()
-	id, _ := types.GenerateUUID("jobname_")
+	id := types.GenerateUUID("jobname_")
 	return models.Job{
 		Name:             id.String(),
 		DeliveryStrategy: models.StrategyAtLeastOnce,

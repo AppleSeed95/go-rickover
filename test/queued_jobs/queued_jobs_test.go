@@ -63,7 +63,7 @@ func TestEnqueue(t *testing.T) {
 
 func testEnqueueNoData(t *testing.T) {
 	t.Parallel()
-	id, _ := types.GenerateUUID("jobname_")
+	id := types.GenerateUUID("jobname_")
 	j := models.Job{
 		Name:             id.String(),
 		DeliveryStrategy: models.StrategyAtLeastOnce,
@@ -76,7 +76,7 @@ func testEnqueueNoData(t *testing.T) {
 	expiresAt := types.NullTime{Valid: false}
 	runAfter := time.Now().UTC()
 
-	qjid, _ := types.GenerateUUID("job_")
+	qjid := types.GenerateUUID("job_")
 	_, err = queued_jobs.Enqueue(qjid, j.Name, runAfter, expiresAt, []byte{})
 	test.AssertError(t, err, "")
 	switch terr := err.(type) {

@@ -9,6 +9,7 @@ import (
 
 	"github.com/Shyp/go-dberror"
 	"github.com/Shyp/go-types"
+	"github.com/kevinburke/go.uuid"
 	"github.com/kevinburke/rickover/downstream"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/archived_jobs"
@@ -16,7 +17,6 @@ import (
 	"github.com/kevinburke/rickover/models/queued_jobs"
 	"github.com/kevinburke/rickover/services"
 	"github.com/kevinburke/rickover/test"
-	"github.com/nu7hatch/gouuid"
 )
 
 var EmptyData = json.RawMessage([]byte("{}"))
@@ -54,10 +54,7 @@ var SampleAtMostOnceJob = models.Job{
 
 // RandomId returns a random UUID with the given prefix.
 func RandomId(prefix string) types.PrefixUUID {
-	id, err := uuid.NewV4()
-	if err != nil {
-		panic(err.Error())
-	}
+	id := uuid.NewV4()
 	return types.PrefixUUID{
 		UUID:   id,
 		Prefix: prefix,
@@ -81,7 +78,7 @@ func CreateQueuedJob(t testing.TB, data json.RawMessage) *models.QueuedJob {
 
 // Like the above but with unique ID's and job names
 func CreateUniqueQueuedJob(t testing.TB, data json.RawMessage) (*models.Job, *models.QueuedJob) {
-	id, _ := types.GenerateUUID("jobname_")
+	id := types.GenerateUUID("jobname_")
 	j := models.Job{
 		Name:             id.String(),
 		DeliveryStrategy: models.StrategyAtLeastOnce,

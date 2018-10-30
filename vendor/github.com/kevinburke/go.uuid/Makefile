@@ -1,12 +1,12 @@
-.PHONY: install build test
-BUMP_VERSION := $(GOPATH)/bin/bump_version
-GODOCDOC := $(GOPATH)/bin/godocdoc
 MEGACHECK := $(GOPATH)/bin/megacheck
 UNAME = $(shell uname -s)
+export GOROOT = $(shell go env GOROOT)
 
-install:
-	go get ./...
-	go install ./...
+test:
+	go test ./...
+
+race-test:
+	go test -race ./...
 
 $(MEGACHECK):
 ifeq ($(UNAME),Darwin)
@@ -16,25 +16,6 @@ else
 endif
 	chmod +x $(MEGACHECK)
 
-
 lint: $(MEGACHECK)
 	$(MEGACHECK) ./...
 	go vet ./...
-
-test: lint
-	go test ./...
-
-race-test:
-	go test -race ./...
-
-$(BUMP_VERSION):
-	go get -u github.com/Shyp/bump_version
-
-release: race-test | $(BUMP_VERSION)
-	$(BUMP_VERSION) minor types.go
-
-$(GODOCDOC):
-	go get -u github.com/kevinburke/godocdoc
-
-docs: | $(GODOCDOC)
-	$(GODOCDOC)

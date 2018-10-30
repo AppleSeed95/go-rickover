@@ -76,11 +76,7 @@ func replayHandler() http.Handler {
 			return
 		}
 
-		newId, err := types.GenerateUUID("job_")
-		if err != nil {
-			writeServerError(w, r, err)
-			return
-		}
+		newId := types.GenerateUUID("job_")
 		queuedJob, err := queued_jobs.Enqueue(newId, jobName, time.Now(), expiresAt, data)
 		if err != nil {
 			writeServerError(w, r, err)
