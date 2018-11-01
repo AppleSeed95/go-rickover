@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/Shyp/go-types"
-	"github.com/Shyp/rickover/models"
+	"github.com/kevinburke/rickover/models"
 )
 
 func ExampleCreate() {

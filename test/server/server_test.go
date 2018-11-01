@@ -10,13 +10,13 @@ import (
 	"time"
 
 	"github.com/Shyp/go-types"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/archived_jobs"
-	"github.com/Shyp/rickover/models/jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
-	"github.com/Shyp/rickover/server"
-	"github.com/Shyp/rickover/test"
-	"github.com/Shyp/rickover/test/factory"
+	"github.com/kevinburke/rickover/models"
+	"github.com/kevinburke/rickover/models/archived_jobs"
+	"github.com/kevinburke/rickover/models/jobs"
+	"github.com/kevinburke/rickover/models/queued_jobs"
+	"github.com/kevinburke/rickover/server"
+	"github.com/kevinburke/rickover/test"
+	"github.com/kevinburke/rickover/test/factory"
 )
 
 var u = &server.UnsafeBypassAuthorizer{}

@@ -9,9 +9,9 @@ import (
 	"github.com/Shyp/go-simple-metrics"
 	"github.com/Shyp/go-types"
 	"github.com/Shyp/rest"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/archived_jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
+	"github.com/kevinburke/rickover/models"
+	"github.com/kevinburke/rickover/models/archived_jobs"
+	"github.com/kevinburke/rickover/models/queued_jobs"
 )
 
 // POST /v1/jobs(/:name)/:id/replay

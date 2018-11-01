@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/Shyp/rickover/models/db"
-	"github.com/Shyp/rickover/setup"
+	"github.com/kevinburke/rickover/models/db"
+	"github.com/kevinburke/rickover/setup"
 )
 
 func SetUp(t testing.TB) {

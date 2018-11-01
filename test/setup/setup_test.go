@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Shyp/rickover/setup"
-	"github.com/Shyp/rickover/test"
+	"github.com/kevinburke/rickover/setup"
+	"github.com/kevinburke/rickover/test"
 )
 
 func TestActiveQueries(t *testing.T) {

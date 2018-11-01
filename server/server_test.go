@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	"github.com/Shyp/rest"
-	"github.com/Shyp/rickover/config"
-	"github.com/Shyp/rickover/test"
+	"github.com/kevinburke/rickover/config"
+	"github.com/kevinburke/rickover/test"
 )
 
 func Test404JSONUnknownResource(t *testing.T) {

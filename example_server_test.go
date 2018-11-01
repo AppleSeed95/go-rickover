@@ -12,11 +12,11 @@ import (
 	"time"
 
 	"github.com/Shyp/go-simple-metrics"
-	"github.com/Shyp/rickover/config"
-	"github.com/Shyp/rickover/models/db"
-	"github.com/Shyp/rickover/server"
-	"github.com/Shyp/rickover/setup"
 	"github.com/gorilla/handlers"
+	"github.com/kevinburke/rickover/config"
+	"github.com/kevinburke/rickover/models/db"
+	"github.com/kevinburke/rickover/server"
+	"github.com/kevinburke/rickover/setup"
 )
 
 var serverDbConns int

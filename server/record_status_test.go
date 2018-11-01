@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/Shyp/rest"
-	"github.com/Shyp/rickover/test"
+	"github.com/kevinburke/rickover/test"
 )
 
 func TestNoBody400(t *testing.T) {

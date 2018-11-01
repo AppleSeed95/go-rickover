@@ -3,7 +3,7 @@ package server
 import (
 	"testing"
 
-	"github.com/Shyp/rickover/test"
+	"github.com/kevinburke/rickover/test"
 )
 
 func TestAddUserAuthsUser(t *testing.T) {

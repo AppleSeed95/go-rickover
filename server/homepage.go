@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Shyp/rickover/config"
+	"github.com/kevinburke/rickover/config"
 )
 
 var data homepageData

@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	"github.com/Shyp/rest"
-	"github.com/Shyp/rickover/test"
+	"github.com/kevinburke/rickover/test"
 )
 
 func newSSAServer() (*SharedSecretAuthorizer, http.Handler) {

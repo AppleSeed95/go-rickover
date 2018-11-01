@@ -7,7 +7,7 @@ import (
 
 	"github.com/Shyp/go-types"
 	"github.com/Shyp/rest"
-	"github.com/Shyp/rickover/models/queued_jobs"
+	"github.com/kevinburke/rickover/models/queued_jobs"
 )
 
 // getId validates that the provided ID is valid, and the prefix matches the

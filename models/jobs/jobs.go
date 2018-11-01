@@ -8,8 +8,8 @@ import (
 	"time"
 
 	dberror "github.com/Shyp/go-dberror"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/db"
+	"github.com/kevinburke/rickover/models"
+	"github.com/kevinburke/rickover/models/db"
 	"github.com/lib/pq"
 )
 

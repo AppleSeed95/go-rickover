@@ -1,5 +1,5 @@
 language: go
-go_import_path: github.com/Shyp/rickover
+go_import_path: github.com/kevinburke/rickover
 
 go:
   - 1.9.x

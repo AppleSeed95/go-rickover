@@ -9,11 +9,11 @@ import (
 	"time"
 
 	"github.com/Shyp/go-simple-metrics"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/archived_jobs"
-	"github.com/Shyp/rickover/models/db"
-	"github.com/Shyp/rickover/models/jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
+	"github.com/kevinburke/rickover/models"
+	"github.com/kevinburke/rickover/models/archived_jobs"
+	"github.com/kevinburke/rickover/models/db"
+	"github.com/kevinburke/rickover/models/jobs"
+	"github.com/kevinburke/rickover/models/queued_jobs"
 )
 
 var mu sync.Mutex

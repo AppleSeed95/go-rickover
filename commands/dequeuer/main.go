@@ -11,11 +11,11 @@ import (
 	"time"
 
 	"github.com/Shyp/go-simple-metrics"
-	"github.com/Shyp/rickover/config"
-	"github.com/Shyp/rickover/dequeuer"
-	"github.com/Shyp/rickover/models/db"
-	"github.com/Shyp/rickover/services"
-	"github.com/Shyp/rickover/setup"
+	"github.com/kevinburke/rickover/config"
+	"github.com/kevinburke/rickover/dequeuer"
+	"github.com/kevinburke/rickover/models/db"
+	"github.com/kevinburke/rickover/services"
+	"github.com/kevinburke/rickover/setup"
 	"golang.org/x/sync/errgroup"
 )
 

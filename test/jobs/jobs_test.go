@@ -6,9 +6,9 @@ import (
 	"time"
 
 	types "github.com/Shyp/go-types"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/jobs"
-	"github.com/Shyp/rickover/test"
+	"github.com/kevinburke/rickover/models"
+	"github.com/kevinburke/rickover/models/jobs"
+	"github.com/kevinburke/rickover/test"
 )
 
 func TestAll(t *testing.T) {
