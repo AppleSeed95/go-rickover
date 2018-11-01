@@ -12,6 +12,7 @@ circle:
 
 travis:
     driver: postgres
+    # todo figure out how to load from PGPORT, run Postgres 10
     open: user=rickover dbname=rickover_test sslmode=disable
 
 cluster:
