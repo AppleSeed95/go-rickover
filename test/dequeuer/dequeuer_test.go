@@ -1,15 +1,20 @@
 package dequeuer
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
+	"log"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 	"time"
 
 	"github.com/kevinburke/rickover/dequeuer"
+	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/test"
 	"github.com/kevinburke/rickover/test/factory"
 )
@@ -149,4 +154,57 @@ func TestCreatePools(t *testing.T) {
 		}
 	}
 	test.Assert(t, foundPool, "Didn't create a pool for the job type")
+}
+
+func runDQBench(b *testing.B, concurrency int) {
+	buf := new(bytes.Buffer)
+	log.SetOutput(buf)
+	defer func() {
+		if b.Failed() {
+			io.Copy(os.Stdout, buf)
+		}
+		log.SetOutput(os.Stdout)
+	}()
+	test.SetUp(b)
+	defer test.TearDown(b)
+	job := factory.CreateJob(b, models.Job{
+		Name:             factory.RandomId("").String()[:8],
+		Concurrency:      uint8(concurrency),
+		DeliveryStrategy: models.StrategyAtLeastOnce,
+		Attempts:         1,
+	})
+	data, _ := json.Marshal(factory.RD)
+	// TODO: figure out how to balance created jobs vs. benchmark runtime.
+	for j := 0; j < 10000; j++ {
+		factory.CreateQueuedJobOnly(b, job.Name, data)
+	}
+	w := &ChannelProcessor{
+		Ch: make(chan struct{}, 1000),
+	}
+	b.ResetTimer()
+	b.ReportAllocs()
+	b.SetBytes(1000)
+	pools, err := dequeuer.CreatePools(w, 0)
+	test.AssertNotError(b, err, "CreatePools")
+	defer func() {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		for _, pool := range pools {
+			pool.Shutdown(ctx)
+		}
+		cancel()
+	}()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			<-w.Ch
+		}
+	})
+}
+
+func BenchmarkDequeue(b *testing.B) {
+	b.Run("Dequeue1", func(b1 *testing.B) { runDQBench(b1, 1) })
+	b.Run("Dequeue4", func(b4 *testing.B) { runDQBench(b4, 4) })
+	b.Run("Dequeue8", func(b8 *testing.B) { runDQBench(b8, 8) })
+	b.Run("Dequeue16", func(b16 *testing.B) { runDQBench(b16, 16) })
+	b.Run("Dequeue64", func(b64 *testing.B) { runDQBench(b64, 64) })
+	b.Run("Dequeue128", func(b128 *testing.B) { runDQBench(b128, 128) })
 }

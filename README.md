@@ -452,9 +452,8 @@ Dep (github.com/golang/dep) is the tool for bringing all dependencies into the p
 
 ## Benchmarks
 
-Running locally on my 2014 MBP, I was able to dequeue 50,000 jobs per minute.
-Note the downstream Node server is too slow, even when run on 4 cores. You will
-want to start the `downstream-server` in this project instead.
+The `Dequeue` benchmark measures dequeue performance at various concurrency
+levels. One `kB` is one run, essentially. It does not use the server.
 
 Some benchmark numbers are here: https://docs.google.com/a/shyp.co/spreadsheets/d/1KF3pqCczDMRXZcq-ZqpQeGKo4sPclThltWhsxHdUPTc/edit?usp=sharing
 
