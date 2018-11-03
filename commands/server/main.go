@@ -12,12 +12,12 @@ import (
 	"os"
 	"time"
 
+	"github.com/gorilla/handlers"
 	"github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/rickover/config"
 	"github.com/kevinburke/rickover/models/db"
 	"github.com/kevinburke/rickover/server"
 	"github.com/kevinburke/rickover/setup"
-	"github.com/gorilla/handlers"
 )
 
 func configure() (http.Handler, error) {
