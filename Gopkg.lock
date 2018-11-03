@@ -2,91 +2,91 @@
 
 
 [[projects]]
-  digest = "1:9856d904793fbe339500e3458c093528dd255634b11c4947aee8e61d040a18ca"
+  digest = "1:d204a44ed9348781efe7b321c287f02584b9da50e3adcbe9e0902a00819b471f"
   name = "github.com/Shyp/go-dberror"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "92eb70dfc8085d97ba843c5cdb8c62086e35e344"
   version = "0.5"
 
 [[projects]]
   branch = "master"
-  digest = "1:38600c5eaee2161885154ddc903ec9ad605f32da073cc0d1580029342c7525b6"
+  digest = "1:04d7cb83f88f60dda10244f770bd20e1816c296b1f485dc2fd49e8e9de638893"
   name = "github.com/Shyp/go-debug"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "8a83ccc090f85476c00619c04fd46f37b973a031"
 
 [[projects]]
-  digest = "1:ac33c712e53c6070eef64a5b82aa04cbf4c5585639c117698b8f838c2f14b3cb"
+  digest = "1:67832026c8a63beddc29934b973a6cb496821da39b595c782edc4ab72c9906c2"
   name = "github.com/Shyp/go-simple-metrics"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "416f9b3f4ee36e7cd9d48f2b50aebbc3949e914f"
   version = "0.3"
 
 [[projects]]
-  digest = "1:7034bcad000781a7694c0faa73f887f95ad4a19c35d9e1b0213f2f9fef5a0251"
+  digest = "1:42be57b973da35e63eb940710f1a078167d9139a3de9e3f67929d6eddb792135"
   name = "github.com/Shyp/go-types"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "d3a92d5d02647ebf45fe2c28cccf4b640544c7a6"
   version = "0.13"
 
 [[projects]]
-  digest = "1:2afee1432f803c7a92e0b3c87d454c841dc2a852f69b5e640b55da5e33464236"
+  digest = "1:4b4ffbb3f05d11fac3396d5e4ce6269bfb7b82ee96ad7c77858ed968e81fcc9c"
   name = "github.com/Shyp/rest"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "b2c053a6ab954961c506c953ba0e735aac5725c2"
   version = "1.1"
 
 [[projects]]
-  digest = "1:9ca737b471693542351e112c9e86be9bf7385e42256893a09ecb2a98e2036f74"
+  digest = "1:c4a2528ccbcabf90f9f3c464a5fc9e302d592861bbfd0b7135a7de8a943d0406"
   name = "github.com/go-stack/stack"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "259ab82a6cad3992b4e21ff5cac294ccb06474bc"
   version = "v1.7.0"
 
 [[projects]]
-  digest = "1:9e5065ab1123551462f4f91b5f0533115b58e3fddddda94dc359554e94939042"
+  digest = "1:dd6e3ba98b11eacc4e8b55e246fd8a2018d73ab91caecd9c22b4940f20434214"
   name = "github.com/gorilla/handlers"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "a24b39a6a2c8a7af2fe664dd4573205c99904035"
 
 [[projects]]
-  digest = "1:cd42e7799605c57153280b45612419aa2657798bea700c04bd8980c00fb88edc"
+  digest = "1:dacb152d24b21683403e82e4e397e973cdc218befff03b0eba8f7fbffcef325c"
   name = "github.com/inconshreveable/log15"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "0decfc6c20d9ca0ad143b0e89dcaa20f810b4fb3"
   version = "v2.13"
 
 [[projects]]
-  digest = "1:1c8e18330665e26ff346d0ee89fa7090e78fc10afa317c2d64531e0cf16254ae"
+  digest = "1:b03f4259168b54b49f9c16b90695d5802972a87930d1f607a8d12f9d0e06f45c"
   name = "github.com/lib/pq"
   packages = [
     ".",
     "oid",
   ]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "3cd0097429be7d611bb644ef85b42bfb102ceea4"
 
 [[projects]]
-  digest = "1:9ea83adf8e96d6304f394d40436f2eb44c1dc3250d223b74088cc253a6cd0a1c"
+  digest = "1:c658e84ad3916da105a761660dcaeb01e63416c8ec7bc62256a9b411a05fcd67"
   name = "github.com/mattn/go-colorable"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "167de6bfdfba052fa6b2d3664c8f5272e23c9072"
   version = "v0.0.9"
 
 [[projects]]
-  digest = "1:78229b46ddb7434f881390029bd1af7661294af31f6802e0e1bedaad4ab0af3c"
+  digest = "1:d4d17353dbd05cb52a2a52b7fe1771883b682806f68db442b436294926bbfafb"
   name = "github.com/mattn/go-isatty"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "0360b2af4f38e8d38c7fce2a9f4e702702d73a39"
   version = "v0.0.3"
 
@@ -94,46 +94,46 @@
   digest = "1:e5c3ad7ed64b1e25b48ccf6795ba7e4fc2d98aedc13441217cb0c920d6ddbcf3"
   name = "github.com/mihasya/go-metrics-librato"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "0ec8d5e8bf04a48fc5c96792bfd016b08afdabad"
 
 [[projects]]
   branch = "master"
-  digest = "1:55c48c9cfdf8bab6f4911f621616fbe223c0b72a6df9aab6b172ab7e5cfc6bd2"
+  digest = "1:0e1e5f960c58fdc677212fcc70e55042a0084d367623e51afbdb568963832f5d"
   name = "github.com/nu7hatch/gouuid"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "179d4d0c4d8d407a32af483c2354df1d2c91e6c3"
 
 [[projects]]
-  digest = "1:b6959768753f723abf40176a8d304a3ed13ced7a537862a02fc410541cd0d688"
+  digest = "1:34a4caa0fc97532679aa65b1c344338099def58f5bc203ba8bd901683adbb544"
   name = "github.com/rcrowley/go-metrics"
   packages = ["."]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "eeba7bd0dd01ace6e690fa833b3f22aaec29af43"
 
 [[projects]]
   branch = "master"
-  digest = "1:f3ee2a699dd02cac37fbca1d028f1121ce0e48143a0f9abd293d3141dcfe6b92"
+  digest = "1:76ee51c3f468493aff39dbacc401e8831fbb765104cbf613b89bef01cf4bad70"
   name = "golang.org/x/net"
   packages = ["context"]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "5ccada7d0a7ba9aeb5d3aca8d3501b4c2a509fec"
 
 [[projects]]
   branch = "master"
-  digest = "1:8aad4e360d6645abe564e925bd6d8d3b94975e52ce68af0c28f91b5aedb0637f"
+  digest = "1:39ebcc2b11457b703ae9ee2e8cca0f68df21969c6102cb3b705f76cca0ea0239"
   name = "golang.org/x/sync"
   packages = ["errgroup"]
-  pruneopts = ""
-  revision = "fd80eb99c8f653c847d294a001bdf2a3a6f768f5"
+  pruneopts = "UT"
+  revision = "1d60e4601c6fd243af51cc01ddf169918a5407ca"
 
 [[projects]]
   branch = "master"
-  digest = "1:aba25123b0b02601b134eaf08bd84afe8e12cab70e43770e7b38d8eef8f1d93e"
+  digest = "1:29aca4405608abab766132e051efab3843e0bf13117468c85561472380a6b957"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "2c42eef0765b9837fbdab12011af7830f55f88f0"
 
 [solve-meta]
