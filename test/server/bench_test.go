@@ -24,17 +24,19 @@ func BenchmarkEnqueue(b *testing.B) {
 	buf := new(bytes.Buffer)
 	json.NewEncoder(buf).Encode(ejr)
 	bits := buf.Bytes()
-	_ = factory.CreateJob(b, factory.SampleJob)
+	factory.CreateJob(b, factory.SampleJob)
 	b.ResetTimer()
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		req, _ := http.NewRequest("PUT", "/v1/jobs/echo/random_id", bytes.NewReader(bits))
-		req.SetBasicAuth("test", testPassword)
-		w := httptest.NewRecorder()
-		server.DefaultServer.ServeHTTP(w, req)
-		b.SetBytes(int64(w.Body.Len()))
-		if w.Code != 202 {
-			b.Fatalf("incorrect Code: %d (response %s)", w.Code, w.Body.Bytes())
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			req, _ := http.NewRequest("PUT", "/v1/jobs/echo/random_id", bytes.NewReader(bits))
+			req.SetBasicAuth("test", testPassword)
+			w := httptest.NewRecorder()
+			server.DefaultServer.ServeHTTP(w, req)
+			b.SetBytes(int64(w.Body.Len()))
+			if w.Code != 202 {
+				b.Fatalf("incorrect Code: %d (response %s)", w.Code, w.Body.Bytes())
+			}
 		}
-	}
+	})
 }
