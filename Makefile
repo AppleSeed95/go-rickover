@@ -75,4 +75,4 @@ $(BENCHSTAT):
 	go get -u golang.org/x/perf/cmd/benchstat
 
 bench: | $(BENCHSTAT)
-	tmp=$$(mktemp); go list ./... | grep -v vendor | xargs go test -p=1 -benchtime=2s -bench=. -run='^$$' > "$$tmp" 2>&1 && $(BENCHSTAT) "$$tmp"
+	go list ./... | grep -v vendor | xargs go test -p=1 -benchtime=2s -bench=. -run='^$$' 2>&1 | $(BENCHSTAT) /dev/stdin
