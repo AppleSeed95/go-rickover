@@ -42,7 +42,7 @@ POST /v1/jobs
 
 This returns a [models.Job][job-type] on success.
 
-[job-type]: https://godoc.org/github.com/Shyp/rickover/models#Job
+[job-type]: https://godoc.org/github.com/kevinburke/rickover/models#Job
 
 #### Enqueue a new job
 
@@ -74,7 +74,7 @@ indicates the latest possible time this job can run. If a job is dequeued after
 the `expires_at` date, we don't send it to the downstream worker, and insert it
 immediately into the `archived_jobs` table with status `expired`.
 
-[queued-job]: https://godoc.org/github.com/Shyp/rickover/models#QueuedJob
+[queued-job]: https://godoc.org/github.com/kevinburke/rickover/models#QueuedJob
 
 #### Record a job's success or failure
 
@@ -139,15 +139,15 @@ type Authorizer interface {
 Then, get a http.Handler with your authorizer by calling
 
 ```go
-import "github.com/Shyp/rickover/server"
+import "github.com/kevinburke/rickover/server"
 
 handler := server.Get(authorizer)
 http.ListenAndServe(":9090", handler)
 ```
 
-[add-user]: https://godoc.org/github.com/Shyp/rickover/server#AddUser
-[default-server]: https://godoc.org/github.com/Shyp/rickover/server#pkg-variables
-[authorizer]: https://godoc.org/github.com/Shyp/rickover/server#Authorizer
+[add-user]: https://godoc.org/github.com/kevinburke/rickover/server#AddUser
+[default-server]: https://godoc.org/github.com/kevinburke/rickover/server#pkg-variables
+[authorizer]: https://godoc.org/github.com/kevinburke/rickover/server#Authorizer
 
 ## Processing jobs
 
@@ -161,7 +161,7 @@ type Worker interface {
 }
 ```
 
-[worker]: https://godoc.org/github.com/Shyp/rickover/dequeuer#Worker
+[worker]: https://godoc.org/github.com/kevinburke/rickover/dequeuer#Worker
 
 A default Worker is provided as [services.JobProcessor][job-processor],
 which makes an API request to a downstream service. The default client is
@@ -169,8 +169,8 @@ which makes an API request to a downstream service. The default client is
 and password for the downstream service:
 
 ```go
-import "github.com/Shyp/rickover/dequeuer"
-import "github.com/Shyp/rickover/services"
+import "github.com/kevinburke/rickover/dequeuer"
+import "github.com/kevinburke/rickover/services"
 
 func main() {
 	password := "hymanrickover"
@@ -182,8 +182,8 @@ func main() {
 }
 ```
 
-[job-processor]: https://godoc.org/github.com/Shyp/rickover/services#JobProcessor
-[downstream-client]: https://godoc.org/github.com/Shyp/rickover/downstream#Client
+[job-processor]: https://godoc.org/github.com/kevinburke/rickover/services#JobProcessor
+[downstream-client]: https://godoc.org/github.com/kevinburke/rickover/downstream#Client
 
 The [downstream.Client][downstream-client] will make a POST request to
 `/v1/jobs/:job-name/:job-id`:
@@ -226,7 +226,7 @@ You can also report status of a job by calling
 [services.HandleStatusCallback][status-callback] directly, with success or
 failure.
 
-[status-callback]: https://godoc.org/github.com/Shyp/rickover/services#HandleStatusCallback
+[status-callback]: https://godoc.org/github.com/kevinburke/rickover/services#HandleStatusCallback
 
 ## Failure Handling
 
@@ -446,26 +446,9 @@ Run `make docs`, which will start a docs server on port 6060 and open it to the
 right documentation page. All public API's will be present, and most function
 calls should be documented - some with examples.
 
-## Working with Godep
+## Working with Dep
 
-Godep is the tool for bringing all dependencies into the project. It's
-unfortunately a pain in the neck. The basic workflow you want is:
-
-```
-# Rewrite all import paths to not have the word Godeps in them
-godep save -r=false ./...
-
-# Rewrite all import paths to refer to Godep equivalents
-godep save -r ./...
-
-# Update a dependency. First go to the package locally, and point it at the new
-# version via "git checkout master" or whatever. Then in this repo, run:
-godep update github.com/Shyp/goshyp/...
-```
-
-If you're only adding new code, you'll likely only need to run `godep save -r
-./...`. The good news is that the CircleCI tests will fail if you screw this
-up, so you can't really deploy unless it works.
+Dep (github.com/golang/dep) is the tool for bringing all dependencies into the project.
 
 ## Benchmarks
 

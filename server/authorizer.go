@@ -98,7 +98,7 @@ func (u *UnsafeBypassAuthorizer) Authorize(userId string, token string) *rest.Er
 	return nil
 }
 
-// handleAuthorizeError handles a non-200 level response from the Shyp API
+// handleAuthorizeError handles a non-200 level response from the API
 // (err) and writes it to the response.
 func handleAuthorizeError(w http.ResponseWriter, r *http.Request, err error) {
 	switch err := err.(type) {

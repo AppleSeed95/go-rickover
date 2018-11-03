@@ -32,7 +32,7 @@ against them in your application.
 ## Basic Usage
 
 ```go
-import dberror "github.com/Shyp/go-dberror"
+import dberror "github.com/kevinburke/go-dberror"
 
 func main() {
 	_, err := db.Exec("INSERT INTO accounts (id) VALUES (null)")
@@ -53,7 +53,7 @@ Failed check constraints are tricky - the native error messages just say
 So you can define your own constraint handlers, and then register them:
 
 ```go
-import dberror "github.com/Shyp/go-dberror"
+import dberror "github.com/kevinburke/go-dberror"
 import "github.com/lib/pq"
 
 func init()

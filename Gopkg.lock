@@ -25,12 +25,12 @@
   version = "v2.13"
 
 [[projects]]
-  digest = "1:00f3e6e30f458f7d0cb181d577a5e1dfe73e45bd4c53b16137bd6d64577d8db9"
+  digest = "1:058afcda3ddbe8ae0ab7ada503de1745c68edbf0bb9e6e536cb07e4d08c72376"
   name = "github.com/kevinburke/go-dberror"
   packages = ["."]
   pruneopts = "UT"
-  revision = "36ecba57721ee9ae8de345cd1de319105d7c651e"
-  version = "0.7"
+  revision = "dbd6c1eafbd0e04c4994b9c94cfb1d90c7727695"
+  version = "0.8"
 
 [[projects]]
   branch = "master"
