@@ -57,7 +57,7 @@ dequeue:
 	@DATABASE_URL=$(DATABASE_URL) go run commands/dequeuer/main.go
 
 $(BUMP_VERSION):
-	go get -u github.com/Shyp/bump_version
+	go get -u github.com/kevinburke/bump_version
 
 release: race-test | $(BUMP_VERSION)
 	$(BUMP_VERSION) minor config/config.go
