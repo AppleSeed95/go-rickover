@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"time"
 
-	dberror "github.com/Shyp/go-dberror"
+	dberror "github.com/kevinburke/go-dberror"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/db"
 	"github.com/lib/pq"

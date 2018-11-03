@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Shyp/go-dberror"
+	"github.com/kevinburke/go-dberror"
 	"github.com/Shyp/go-types"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/jobs"

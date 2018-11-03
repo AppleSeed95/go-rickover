@@ -3,7 +3,7 @@
   go-tests = true
 
 [[constraint]]
-  name = "github.com/Shyp/go-dberror"
+  name = "github.com/kevinburke/go-dberror"
   version = "0.7.0"
 
 [[constraint]]

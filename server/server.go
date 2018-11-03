@@ -16,7 +16,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Shyp/go-dberror"
+	"github.com/kevinburke/go-dberror"
 	"github.com/Shyp/go-simple-metrics"
 	"github.com/Shyp/go-types"
 	"github.com/Shyp/rest"

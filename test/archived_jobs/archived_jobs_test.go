@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Shyp/go-dberror"
+	"github.com/kevinburke/go-dberror"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/archived_jobs"
 	"github.com/kevinburke/rickover/models/queued_jobs"

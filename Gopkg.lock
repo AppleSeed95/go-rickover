@@ -2,14 +2,6 @@
 
 
 [[projects]]
-  digest = "1:00f3e6e30f458f7d0cb181d577a5e1dfe73e45bd4c53b16137bd6d64577d8db9"
-  name = "github.com/Shyp/go-dberror"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "36ecba57721ee9ae8de345cd1de319105d7c651e"
-  version = "0.7"
-
-[[projects]]
   branch = "master"
   digest = "1:04d7cb83f88f60dda10244f770bd20e1816c296b1f485dc2fd49e8e9de638893"
   name = "github.com/Shyp/go-debug"
@@ -63,6 +55,14 @@
   pruneopts = "UT"
   revision = "0decfc6c20d9ca0ad143b0e89dcaa20f810b4fb3"
   version = "v2.13"
+
+[[projects]]
+  digest = "1:00f3e6e30f458f7d0cb181d577a5e1dfe73e45bd4c53b16137bd6d64577d8db9"
+  name = "github.com/kevinburke/go-dberror"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "36ecba57721ee9ae8de345cd1de319105d7c651e"
+  version = "0.7"
 
 [[projects]]
   digest = "1:c34274a85e6b86a0bedded8671647fbf9b84a73411e5b04beaf75ff34596b117"
@@ -159,11 +159,12 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/Shyp/go-dberror",
     "github.com/Shyp/go-simple-metrics",
     "github.com/Shyp/go-types",
     "github.com/Shyp/rest",
     "github.com/gorilla/handlers",
+    "github.com/kevinburke/go-dberror",
+    "github.com/kevinburke/go.uuid",
     "github.com/lib/pq",
     "github.com/nu7hatch/gouuid",
     "golang.org/x/sync/errgroup",
