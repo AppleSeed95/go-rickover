@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/kevinburke/go-simple-metrics"
-	"github.com/Shyp/rest"
+	"github.com/kevinburke/rest"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/queued_jobs"
 	"github.com/kevinburke/rickover/services"

@@ -15,5 +15,9 @@
   version = "0.23.0"
 
 [[constraint]]
+  name = "github.com/kevinburke/rest"
+  version = "2.1"
+
+[[constraint]]
   branch = "master"
   name = "github.com/nu7hatch/gouuid"

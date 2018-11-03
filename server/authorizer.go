@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/Shyp/rest"
+	"github.com/kevinburke/rest"
 )
 
 var DefaultAuthorizer = NewSharedSecretAuthorizer()
@@ -104,7 +104,7 @@ func handleAuthorizeError(w http.ResponseWriter, r *http.Request, err error) {
 	switch err := err.(type) {
 	case *rest.Error:
 		if err.ID == "forbidden_api" || err.ID == "missing_authentication" {
-			err.StatusCode = 401
+			err.Status = 401
 			authenticate(w, err)
 			return
 		}
@@ -112,11 +112,11 @@ func handleAuthorizeError(w http.ResponseWriter, r *http.Request, err error) {
 			forbidden(w, err)
 			return
 		}
-		if err.StatusCode == http.StatusInternalServerError || err.ID == "server_error" {
+		if err.Status == http.StatusInternalServerError || err.ID == "server_error" {
 			writeServerError(w, r, err)
 			return
 		}
-		w.WriteHeader(err.StatusCode)
+		w.WriteHeader(err.Status)
 		json.NewEncoder(w).Encode(err)
 		return
 	default:

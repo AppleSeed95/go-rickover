@@ -8,7 +8,7 @@ import (
 
 	"github.com/kevinburke/go-simple-metrics"
 	"github.com/Shyp/go-types"
-	"github.com/Shyp/rest"
+	"github.com/kevinburke/rest"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/archived_jobs"
 	"github.com/kevinburke/rickover/models/queued_jobs"

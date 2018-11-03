@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Shyp/rest"
+	"github.com/kevinburke/rest"
 	"github.com/kevinburke/rickover/config"
 	"github.com/kevinburke/rickover/test"
 )

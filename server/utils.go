@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/Shyp/go-types"
-	"github.com/Shyp/rest"
+	"github.com/kevinburke/rest"
 	"github.com/kevinburke/rickover/models/queued_jobs"
 )
 

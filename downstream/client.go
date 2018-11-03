@@ -16,7 +16,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Shyp/rest"
+	"github.com/kevinburke/rest"
 )
 
 const defaultHTTPTimeout = 6500 * time.Millisecond

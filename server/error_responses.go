@@ -8,52 +8,52 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Shyp/rest"
+	"github.com/kevinburke/rest"
 )
 
 func new405(r *http.Request) *rest.Error {
 	return &rest.Error{
-		Title:      "Method not allowed",
-		ID:         "method_not_allowed",
-		Instance:   r.URL.Path,
-		StatusCode: 405,
+		Title:    "Method not allowed",
+		ID:       "method_not_allowed",
+		Instance: r.URL.Path,
+		Status:   405,
 	}
 }
 
 func new404(r *http.Request) *rest.Error {
 	return &rest.Error{
-		Title:      "Resource not found",
-		ID:         "not_found",
-		Instance:   r.URL.Path,
-		StatusCode: 404,
+		Title:    "Resource not found",
+		ID:       "not_found",
+		Instance: r.URL.Path,
+		Status:   404,
 	}
 }
 
 func new403(r *http.Request) *rest.Error {
 	return &rest.Error{
-		Title:      "Username or password are invalid. Please double check your credentials",
-		ID:         "forbidden",
-		Instance:   r.URL.Path,
-		StatusCode: 403,
+		Title:    "Username or password are invalid. Please double check your credentials",
+		ID:       "forbidden",
+		Instance: r.URL.Path,
+		Status:   403,
 	}
 }
 
 func insecure403(r *http.Request) *rest.Error {
 	return &rest.Error{
-		Title:      "Server not available over HTTP",
-		ID:         "insecure_request",
-		Detail:     "For your security, please use an encrypted connection",
-		Instance:   r.URL.Path,
-		StatusCode: 403,
+		Title:    "Server not available over HTTP",
+		ID:       "insecure_request",
+		Detail:   "For your security, please use an encrypted connection",
+		Instance: r.URL.Path,
+		Status:   403,
 	}
 }
 
 func new401(r *http.Request) *rest.Error {
 	return &rest.Error{
-		Title:      "Unauthorized. Please include your API credentials",
-		ID:         "unauthorized",
-		Instance:   r.URL.Path,
-		StatusCode: 401,
+		Title:    "Unauthorized. Please include your API credentials",
+		ID:       "unauthorized",
+		Instance: r.URL.Path,
+		Status:   401,
 	}
 }
 
@@ -99,9 +99,9 @@ func forbidden(w http.ResponseWriter, err *rest.Error) {
 }
 
 var serverError = rest.Error{
-	StatusCode: http.StatusInternalServerError,
-	ID:         "server_error",
-	Title:      "Unexpected server error. Please try again",
+	Status: http.StatusInternalServerError,
+	ID:     "server_error",
+	Title:  "Unexpected server error. Please try again",
 }
 
 // writeServerError logs the provided error, and returns a generic server error

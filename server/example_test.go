@@ -3,7 +3,7 @@ package server
 import (
 	"net/http"
 
-	"github.com/Shyp/rest"
+	"github.com/kevinburke/rest"
 )
 
 type auther struct{}
