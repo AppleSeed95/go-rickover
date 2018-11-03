@@ -7,7 +7,6 @@ import (
 	"log"
 	"os"
 	"os/signal"
-	"syscall"
 	"time"
 
 	"github.com/kevinburke/go-simple-metrics"
@@ -17,6 +16,7 @@ import (
 	"github.com/kevinburke/rickover/services"
 	"github.com/kevinburke/rickover/setup"
 	"golang.org/x/sync/errgroup"
+	"golang.org/x/sys/unix"
 )
 
 func checkError(err error) {
@@ -67,19 +67,19 @@ func main() {
 	checkError(err)
 
 	sigterm := make(chan os.Signal, 1)
-	signal.Notify(sigterm, syscall.SIGTERM)
+	signal.Notify(sigterm, unix.SIGINT, unix.SIGTERM)
 	sig := <-sigterm
 	fmt.Printf("Caught signal %v, shutting down...\n", sig)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	g, _ := errgroup.WithContext(ctx)
+	g, errctx := errgroup.WithContext(ctx)
 	for _, p := range pools {
 		if p != nil {
 			p := p
 			g.Go(func() error {
-				err = p.Shutdown()
+				err := p.Shutdown(errctx)
 				if err != nil {
-					log.Printf("Error shutting down pool: %s\n", err.Error())
+					log.Printf("Error shutting down pool: %v", err.Error())
 				}
 				return err
 			})
@@ -88,5 +88,5 @@ func main() {
 	if err := g.Wait(); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("All pools shut down. Quitting.")
+	log.Println("All pools shut down. Quitting.")
 }

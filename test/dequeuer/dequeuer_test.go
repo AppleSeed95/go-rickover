@@ -1,6 +1,7 @@
 package dequeuer
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -32,7 +33,7 @@ func testWorkerShutsDown(t *testing.T) {
 	}
 	c1 := make(chan bool, 1)
 	go func() {
-		err := pool.Shutdown()
+		err := pool.Shutdown(context.Background())
 		test.AssertNotError(t, err, "")
 		c1 <- true
 	}()
@@ -77,7 +78,7 @@ func testWorkerMakesCorrectRequest(t *testing.T) {
 	jp := factory.Processor(s.URL)
 	pool := dequeuer.NewPool(qj.Name)
 	pool.AddDequeuer(jp)
-	defer pool.Shutdown()
+	defer pool.Shutdown(context.Background())
 	select {
 	case <-c1:
 		test.AssertEquals(t, path, fmt.Sprintf("/v1/jobs/%s/%s", qj.Name, qj.ID.String()))
@@ -114,7 +115,7 @@ func testWorkerMakesExactlyOneRequest(t *testing.T) {
 		jp := factory.Processor(s.URL)
 		pool.AddDequeuer(jp)
 	}
-	defer pool.Shutdown()
+	defer pool.Shutdown(context.Background())
 	count := 0
 	for {
 		select {

@@ -2,6 +2,7 @@
 package dequeuer
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"log"
@@ -143,7 +144,7 @@ var poolShutdown = errors.New("Cannot add worker because the pool is shutting do
 
 // RemoveDequeuer removes a dequeuer from the pool and sends that dequeuer
 // a shutdown signal.
-func (p *Pool) RemoveDequeuer() error {
+func (p *Pool) RemoveDequeuer(ctx context.Context) error {
 	p.mu.Lock()
 	defer p.mu.Unlock()
 	if len(p.Dequeuers) == 0 {
@@ -157,17 +158,26 @@ func (p *Pool) RemoveDequeuer() error {
 }
 
 // Shutdown all workers in the pool.
-func (p *Pool) Shutdown() error {
+func (p *Pool) Shutdown(ctx context.Context) error {
 	p.receivedShutdownSignal = true
 	l := len(p.Dequeuers)
 	for i := 0; i < l; i++ {
-		err := p.RemoveDequeuer()
+		err := p.RemoveDequeuer(ctx)
 		if err != nil {
 			return err
 		}
 	}
-	p.wg.Wait()
-	return nil
+	done := make(chan struct{}, 1)
+	go func() {
+		p.wg.Wait()
+		done <- struct{}{}
+	}()
+	select {
+	case <-done:
+		return nil
+	case <-ctx.Done():
+		return ctx.Err()
+	}
 }
 
 func (d *Dequeuer) Work(name string, wg *sync.WaitGroup) {

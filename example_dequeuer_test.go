@@ -12,12 +12,11 @@
 package rickover
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
 	"os/signal"
-	"sync"
-	"syscall"
 	"time"
 
 	"github.com/kevinburke/go-simple-metrics"
@@ -26,6 +25,8 @@ import (
 	"github.com/kevinburke/rickover/models/db"
 	"github.com/kevinburke/rickover/services"
 	"github.com/kevinburke/rickover/setup"
+	"golang.org/x/sync/errgroup"
+	"golang.org/x/sys/unix"
 )
 
 var dbConns int
@@ -71,22 +72,22 @@ func Example_dequeuer() {
 	}
 
 	sigterm := make(chan os.Signal, 1)
-	signal.Notify(sigterm, syscall.SIGTERM)
+	signal.Notify(sigterm, unix.SIGINT, unix.SIGTERM)
 	sig := <-sigterm
 	fmt.Printf("Caught signal %v, shutting down...\n", sig)
-	var wg sync.WaitGroup
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	group, errctx := errgroup.WithContext(ctx)
 	for _, p := range pools {
 		if p != nil {
-			wg.Add(1)
-			go func(p *dequeuer.Pool) {
-				err = p.Shutdown()
-				if err != nil {
-					log.Printf("Error shutting down pool: %s\n", err.Error())
-				}
-				wg.Done()
-			}(p)
+			p := p
+			group.Go(func() error {
+				return p.Shutdown(errctx)
+			})
 		}
 	}
-	wg.Wait()
-	fmt.Println("All pools shut down. Quitting.")
+	if err := group.Wait(); err != nil {
+		log.Printf("Error shutting down pool: %v", err.Error())
+	}
+	log.Println("All pools shut down. Quitting.")
 }
