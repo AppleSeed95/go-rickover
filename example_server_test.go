@@ -40,7 +40,7 @@ func Example_server() {
 		log.Fatal(err)
 	}
 
-	metrics.Start("web")
+	metrics.Start("web", "TODO@example.com")
 
 	go setup.MeasureActiveQueries(5 * time.Second)
 

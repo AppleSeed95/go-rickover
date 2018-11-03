@@ -50,7 +50,7 @@ func Example_dequeuer() {
 		log.Fatal(err)
 	}
 
-	metrics.Start("worker")
+	metrics.Start("worker", "TODO@example.com")
 
 	go setup.MeasureActiveQueries(1 * time.Second)
 	go setup.MeasureQueueDepth(5 * time.Second)

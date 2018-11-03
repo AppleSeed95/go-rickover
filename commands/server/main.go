@@ -32,7 +32,7 @@ func configure() (http.Handler, error) {
 	}
 
 	metrics.Namespace = "rickover.server"
-	metrics.Start("web")
+	metrics.Start("web", os.Getenv("LIBRATO_EMAIL_ACCOUNT"))
 
 	go setup.MeasureActiveQueries(5 * time.Second)
 

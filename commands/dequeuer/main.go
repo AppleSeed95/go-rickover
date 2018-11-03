@@ -52,7 +52,7 @@ func main() {
 	}
 
 	metrics.Namespace = "rickover.dequeuer"
-	metrics.Start("worker")
+	metrics.Start("worker", os.Getenv("LIBRATO_EMAIL_ACCOUNT"))
 
 	downstreamPassword := os.Getenv("DOWNSTREAM_WORKER_AUTH")
 	if downstreamPassword == "" {

@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	godebug "github.com/Shyp/go-debug"
+	godebug "github.com/kevinburke/go-debug"
 	librato "github.com/mihasya/go-metrics-librato"
 	metrics "github.com/rcrowley/go-metrics"
 )
@@ -33,15 +33,15 @@ func getWithNamespace(metricName string) string {
 
 // Start initializes the metrics client. You must call this before sending
 // metrics, or metrics will not get published to Librato.
-func Start(source string) {
-	token := os.Getenv("LIBRATO_TOKEN")
-	if token == "" {
+func Start(source string, email string) {
+	token, ok := os.LookupEnv("LIBRATO_TOKEN")
+	if !ok || token == "" {
 		log.Printf("Could not find LIBRATO_TOKEN environment variable; no metrics will be logged")
 	} else {
 		go librato.Librato(
 			metrics.DefaultRegistry,
 			15*time.Second,
-			"devops@shyp.com",
+			email,
 			token,
 			source,
 			[]float64{0.5, 0.99, 1},

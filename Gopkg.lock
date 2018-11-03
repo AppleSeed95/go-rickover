@@ -2,14 +2,6 @@
 
 
 [[projects]]
-  branch = "master"
-  digest = "1:04d7cb83f88f60dda10244f770bd20e1816c296b1f485dc2fd49e8e9de638893"
-  name = "github.com/Shyp/go-debug"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "8a83ccc090f85476c00619c04fd46f37b973a031"
-
-[[projects]]
   digest = "1:c4a2528ccbcabf90f9f3c464a5fc9e302d592861bbfd0b7135a7de8a943d0406"
   name = "github.com/go-stack/stack"
   packages = ["."]
@@ -41,12 +33,20 @@
   version = "0.7"
 
 [[projects]]
-  digest = "1:67832026c8a63beddc29934b973a6cb496821da39b595c782edc4ab72c9906c2"
+  branch = "master"
+  digest = "1:04d7cb83f88f60dda10244f770bd20e1816c296b1f485dc2fd49e8e9de638893"
+  name = "github.com/kevinburke/go-debug"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "8a83ccc090f85476c00619c04fd46f37b973a031"
+
+[[projects]]
+  digest = "1:62637422795c7731020e31a0870ef9e9808b22c43a6b1f8e3ae1082c1f28ea7a"
   name = "github.com/kevinburke/go-simple-metrics"
   packages = ["."]
   pruneopts = "UT"
-  revision = "d8fa2636e45141840836dbb4f5756fba71715d2e"
-  version = "0.4"
+  revision = "ca866293b9565a00b1e69543f1a96f01b76f7bd0"
+  version = "1.0"
 
 [[projects]]
   digest = "1:2ad808696af54cbb4fcba262b66cad43ad66b06bb871654a4a7c369d60dbd22c"
