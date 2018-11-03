@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/Shyp/go-types"
+	"github.com/kevinburke/go-types"
 )
 
 type JobService struct {

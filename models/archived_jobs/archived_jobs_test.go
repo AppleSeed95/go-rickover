@@ -3,7 +3,7 @@ package archived_jobs
 import (
 	"fmt"
 
-	"github.com/Shyp/go-types"
+	"github.com/kevinburke/go-types"
 	"github.com/kevinburke/rickover/models"
 )
 

@@ -10,14 +10,6 @@
   revision = "8a83ccc090f85476c00619c04fd46f37b973a031"
 
 [[projects]]
-  digest = "1:9e936f115f4e6571acdb0e7430bde8ccb3518ce0629081b9add5f31f1e4b9a1b"
-  name = "github.com/Shyp/go-types"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "5acc7efdb0f05220e75f16ef00c2c187a8f11351"
-  version = "0.23"
-
-[[projects]]
   digest = "1:c4a2528ccbcabf90f9f3c464a5fc9e302d592861bbfd0b7135a7de8a943d0406"
   name = "github.com/go-stack/stack"
   packages = ["."]
@@ -55,6 +47,14 @@
   pruneopts = "UT"
   revision = "d8fa2636e45141840836dbb4f5756fba71715d2e"
   version = "0.4"
+
+[[projects]]
+  digest = "1:2ad808696af54cbb4fcba262b66cad43ad66b06bb871654a4a7c369d60dbd22c"
+  name = "github.com/kevinburke/go-types"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "31250f49d75aade5d5389ab908d0eae15654bd41"
+  version = "0.24"
 
 [[projects]]
   digest = "1:c34274a85e6b86a0bedded8671647fbf9b84a73411e5b04beaf75ff34596b117"
@@ -159,10 +159,10 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/Shyp/go-types",
     "github.com/gorilla/handlers",
     "github.com/kevinburke/go-dberror",
     "github.com/kevinburke/go-simple-metrics",
+    "github.com/kevinburke/go-types",
     "github.com/kevinburke/go.uuid",
     "github.com/kevinburke/rest",
     "github.com/lib/pq",

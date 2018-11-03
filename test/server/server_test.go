@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Shyp/go-types"
+	"github.com/kevinburke/go-types"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/archived_jobs"
 	"github.com/kevinburke/rickover/models/jobs"

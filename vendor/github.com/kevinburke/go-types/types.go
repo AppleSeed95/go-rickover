@@ -4,23 +4,12 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
-const Version = "0.23"
+const Version = "0.24"
 
 // A NullString is a String that may be null. It can be encoded or decoded from
-// JSON, or the database. Here's how to use it as a scan destination:
-//
-//  var s NullString
-//  err := db.QueryRow("SELECT name FROM foo WHERE id=?", id).Scan(&s)
-//  ...
-//  if s.Valid {
-//     // use s.String
-//  } else {
-//     // NULL value
-//  }
-//
+// JSON or the database.
 type NullString struct {
 	Valid  bool
 	String string
@@ -70,7 +59,7 @@ func (ns NullString) Value() (driver.Value, error) {
 	return ns.String, nil
 }
 
-var errLeadingInt = errors.New("time: bad [0-9]*") // never printed
+var errLeadingInt = errors.New("types: bad [0-9]*") // never printed
 
 // leadingInt consumes the leading [0-9]* from s.
 func leadingInt(s string) (x int64, rem string, err error) {
@@ -241,13 +230,12 @@ func (b Bits) String() string {
 		w -= 2
 		copy(buf[w:], "bit")
 		w = fmtInt(buf[:w], u)
-	} else if u < uint64(Kilobyte) {
-		buf[w] = 'B'
-		val := strconv.FormatFloat(float64(u)/float64(8), 'f', 3, 64)
-		w -= len(val)
-		copy(buf[w:], val)
 	} else {
 		switch {
+		case u < uint64(Kilobyte):
+			w -= 0
+			buf[w] = 'B'
+			u = (u * 1e3 / 8)
 		case u < uint64(Megabyte):
 			w -= 1
 			copy(buf[w:], "kB")

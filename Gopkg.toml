@@ -11,8 +11,8 @@
   version = "0.4"
 
 [[constraint]]
-  name = "github.com/Shyp/go-types"
-  version = "0.23.0"
+  name = "github.com/kevinburke/go-types"
+  version = "0.24"
 
 [[constraint]]
   name = "github.com/kevinburke/rest"

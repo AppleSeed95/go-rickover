@@ -3,7 +3,7 @@ package queued_jobs
 import (
 	"fmt"
 
-	"github.com/Shyp/go-types"
+	"github.com/kevinburke/go-types"
 )
 
 func ExampleDelete() {

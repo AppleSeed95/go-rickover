@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/Shyp/go-types"
+	"github.com/kevinburke/go-types"
 )
 
 // An ArchivedJob is an in-memory representation of an archived job.

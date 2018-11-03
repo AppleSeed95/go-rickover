@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/Shyp/go-types"
+	"github.com/kevinburke/go-types"
 	"github.com/kevinburke/rest"
 	"github.com/kevinburke/rickover/models/queued_jobs"
 )

@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/kevinburke/go-simple-metrics"
-	"github.com/Shyp/go-types"
+	"github.com/kevinburke/go-types"
 	"github.com/kevinburke/rest"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/archived_jobs"

@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/kevinburke/go-dberror"
-	"github.com/Shyp/go-types"
+	"github.com/kevinburke/go-types"
 	"github.com/kevinburke/go.uuid"
 	"github.com/kevinburke/rickover/downstream"
 	"github.com/kevinburke/rickover/models"

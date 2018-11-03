@@ -23,10 +23,12 @@ func (u PrefixUUID) String() string {
 
 // GenerateUUID generates a UUID with the given prefix.
 func GenerateUUID(prefix string) PrefixUUID {
-	return PrefixUUID{
+	uid := uuid.NewV4()
+	id := PrefixUUID{
 		Prefix: prefix,
-		UUID:   uuid.NewV4(),
+		UUID:   uid,
 	}
+	return id
 }
 
 // NewPrefixUUID creates a PrefixUUID from the prefix and string uuid. Returns
@@ -67,7 +69,7 @@ func (pu PrefixUUID) MarshalJSON() ([]byte, error) {
 
 // Scan implements the Scanner interface. Note only the UUID gets scanned/set
 // here, we can't determine the prefix from the database. `value` should be
-// a [16]byte or a string.
+// a [16]byte
 func (pu *PrefixUUID) Scan(value interface{}) error {
 	if value == nil {
 		return errors.New("types: cannot scan null into a PrefixUUID")
