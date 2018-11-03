@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Shyp/go-simple-metrics"
+	"github.com/kevinburke/go-simple-metrics"
 	"github.com/Shyp/rest"
 	"github.com/kevinburke/rickover/downstream"
 	"github.com/kevinburke/rickover/models"

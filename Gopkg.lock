@@ -10,14 +10,6 @@
   revision = "8a83ccc090f85476c00619c04fd46f37b973a031"
 
 [[projects]]
-  digest = "1:67832026c8a63beddc29934b973a6cb496821da39b595c782edc4ab72c9906c2"
-  name = "github.com/Shyp/go-simple-metrics"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "416f9b3f4ee36e7cd9d48f2b50aebbc3949e914f"
-  version = "0.3"
-
-[[projects]]
   digest = "1:9e936f115f4e6571acdb0e7430bde8ccb3518ce0629081b9add5f31f1e4b9a1b"
   name = "github.com/Shyp/go-types"
   packages = ["."]
@@ -63,6 +55,14 @@
   pruneopts = "UT"
   revision = "36ecba57721ee9ae8de345cd1de319105d7c651e"
   version = "0.7"
+
+[[projects]]
+  digest = "1:67832026c8a63beddc29934b973a6cb496821da39b595c782edc4ab72c9906c2"
+  name = "github.com/kevinburke/go-simple-metrics"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "d8fa2636e45141840836dbb4f5756fba71715d2e"
+  version = "0.4"
 
 [[projects]]
   digest = "1:c34274a85e6b86a0bedded8671647fbf9b84a73411e5b04beaf75ff34596b117"
@@ -159,11 +159,11 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/Shyp/go-simple-metrics",
     "github.com/Shyp/go-types",
     "github.com/Shyp/rest",
     "github.com/gorilla/handlers",
     "github.com/kevinburke/go-dberror",
+    "github.com/kevinburke/go-simple-metrics",
     "github.com/kevinburke/go.uuid",
     "github.com/lib/pq",
     "github.com/nu7hatch/gouuid",

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Shyp/go-simple-metrics"
+	"github.com/kevinburke/go-simple-metrics"
 	"github.com/Shyp/rest"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/queued_jobs"

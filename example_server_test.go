@@ -11,7 +11,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Shyp/go-simple-metrics"
+	"github.com/kevinburke/go-simple-metrics"
 	"github.com/gorilla/handlers"
 	"github.com/kevinburke/rickover/config"
 	"github.com/kevinburke/rickover/models/db"

@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Shyp/go-simple-metrics"
+	"github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/archived_jobs"
 	"github.com/kevinburke/rickover/models/db"

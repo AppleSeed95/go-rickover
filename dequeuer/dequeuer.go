@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/kevinburke/go-dberror"
-	"github.com/Shyp/go-simple-metrics"
+	"github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/jobs"
 	"github.com/kevinburke/rickover/models/queued_jobs"

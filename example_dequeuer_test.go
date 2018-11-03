@@ -20,7 +20,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Shyp/go-simple-metrics"
+	"github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/rickover/config"
 	"github.com/kevinburke/rickover/dequeuer"
 	"github.com/kevinburke/rickover/models/db"

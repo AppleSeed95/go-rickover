@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Shyp/go-simple-metrics"
+	"github.com/kevinburke/go-simple-metrics"
 	"github.com/Shyp/go-types"
 	"github.com/Shyp/rest"
 	"github.com/kevinburke/rickover/models"
