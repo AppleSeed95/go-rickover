@@ -2,7 +2,6 @@ package services
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"sync"
@@ -18,7 +17,6 @@ import (
 	"github.com/kevinburke/rickover/services"
 	"github.com/kevinburke/rickover/test"
 	"github.com/kevinburke/rickover/test/factory"
-	"github.com/nu7hatch/gouuid"
 )
 
 func TestAll(t *testing.T) {
@@ -82,8 +80,7 @@ func TestWorkerRetriesJSON503(t *testing.T) {
 	_, err := jobs.Create(factory.SampleJob)
 	test.AssertNotError(t, err, "")
 
-	id, _ := uuid.NewV4()
-	pid, _ := types.NewPrefixUUID(fmt.Sprintf("job_%s", id))
+	pid := types.GenerateUUID("job_")
 
 	var data json.RawMessage
 	data, err = json.Marshal(factory.RD)

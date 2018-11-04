@@ -106,14 +106,6 @@
   revision = "0ec8d5e8bf04a48fc5c96792bfd016b08afdabad"
 
 [[projects]]
-  branch = "master"
-  digest = "1:0e1e5f960c58fdc677212fcc70e55042a0084d367623e51afbdb568963832f5d"
-  name = "github.com/nu7hatch/gouuid"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "179d4d0c4d8d407a32af483c2354df1d2c91e6c3"
-
-[[projects]]
   digest = "1:34a4caa0fc97532679aa65b1c344338099def58f5bc203ba8bd901683adbb544"
   name = "github.com/rcrowley/go-metrics"
   packages = ["."]
@@ -166,8 +158,8 @@
     "github.com/kevinburke/go.uuid",
     "github.com/kevinburke/rest",
     "github.com/lib/pq",
-    "github.com/nu7hatch/gouuid",
     "golang.org/x/sync/errgroup",
+    "golang.org/x/sys/unix",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
