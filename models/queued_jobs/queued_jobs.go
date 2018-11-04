@@ -158,9 +158,7 @@ SELECT %s FROM queued_jobs WHERE status='%s' AND updated_at < $1 LIMIT %d`,
 // returned.
 func Enqueue(id types.PrefixUUID, name string, runAfter time.Time, expiresAt types.NullTime, data json.RawMessage) (*models.QueuedJob, error) {
 	qj := new(models.QueuedJob)
-	// need to scan into a []byte, https://github.com/golang/go/issues/13905
-	var bt []byte
-	err := enqueueStmt.QueryRow(id, name, runAfter, expiresAt, []byte(data)).Scan(args(qj, &bt)...)
+	err := enqueueStmt.QueryRow(id, name, runAfter, expiresAt, []byte(data)).Scan(args(qj)...)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			e := &UnknownOrArchivedError{
@@ -170,7 +168,6 @@ func Enqueue(id types.PrefixUUID, name string, runAfter time.Time, expiresAt typ
 		}
 		return nil, dberror.GetError(err)
 	}
-	qj.Data = json.RawMessage(bt)
 	return qj, err
 }
 
@@ -178,15 +175,13 @@ func Enqueue(id types.PrefixUUID, name string, runAfter time.Time, expiresAt typ
 // record could be found, the error will be `queued_jobs.ErrNotFound`.
 func Get(id types.PrefixUUID) (*models.QueuedJob, error) {
 	qj := new(models.QueuedJob)
-	var bt []byte
-	err := getStmt.QueryRow(id).Scan(args(qj, &bt)...)
+	err := getStmt.QueryRow(id).Scan(args(qj)...)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, ErrNotFound
 		}
 		return nil, dberror.GetError(err)
 	}
-	qj.Data = json.RawMessage(bt)
 	return qj, nil
 }
 
@@ -238,8 +233,6 @@ func DeleteRetry(id types.PrefixUUID, attempts uint8) error {
 // the queued job and a boolean indicating whether the SELECT query found
 // a row, or a generic error/sql.ErrNoRows if no jobs are available.
 func Acquire(name string) (*models.QueuedJob, error) {
-	qj := new(models.QueuedJob)
-	var bt []byte
 
 	rows, err := acquireStmt.Query(name)
 	if err != nil {
@@ -249,10 +242,12 @@ func Acquire(name string) (*models.QueuedJob, error) {
 	defer rows.Close()
 	count := 0
 	scanned := false
+	var qj *models.QueuedJob
 	for rows.Next() {
 		count += 1
 		if !scanned {
-			rows.Scan(args(qj, &bt)...)
+			qj = new(models.QueuedJob)
+			rows.Scan(args(qj)...)
 			scanned = true
 		}
 	}
@@ -263,11 +258,9 @@ func Acquire(name string) (*models.QueuedJob, error) {
 		fmt.Println(time.Now().UTC())
 		panic(fmt.Sprintf("Too many rows affected by Acquire for '%s': %d", name, count))
 	}
-	err = rows.Err()
-	if err != nil {
+	if err := rows.Err(); err != nil {
 		return nil, err
 	}
-	qj.Data = json.RawMessage(bt)
 	return qj, nil
 }
 
@@ -280,13 +273,11 @@ func Acquire(name string) (*models.QueuedJob, error) {
 // value will be this number minus 1.
 func Decrement(id types.PrefixUUID, attempts uint8, runAfter time.Time) (*models.QueuedJob, error) {
 	qj := new(models.QueuedJob)
-	var bt []byte
-	err := decrementStmt.QueryRow(id, attempts, runAfter).Scan(args(qj, &bt)...)
+	err := decrementStmt.QueryRow(id, attempts, runAfter).Scan(args(qj)...)
 	if err != nil {
 		err = dberror.GetError(err)
 		return nil, err
 	}
-	qj.Data = json.RawMessage(bt)
 	return qj, nil
 }
 
@@ -302,12 +293,9 @@ func GetOldInProgressJobs(olderThan time.Time) ([]*models.QueuedJob, error) {
 	defer rows.Close()
 	for rows.Next() {
 		qj := new(models.QueuedJob)
-		var bt []byte
-		err = rows.Scan(args(qj, &bt)...)
-		if err != nil {
+		if err := rows.Scan(args(qj)...); err != nil {
 			return jobs, err
 		}
-		qj.Data = json.RawMessage(bt)
 		jobs = append(jobs, qj)
 	}
 	err = rows.Err()
@@ -368,7 +356,7 @@ func fields() string {
 	updated_at`, Prefix)
 }
 
-func args(qj *models.QueuedJob, byteptr *[]byte) []interface{} {
+func args(qj *models.QueuedJob) []interface{} {
 	return []interface{}{
 		&qj.ID,
 		&qj.Name,
@@ -376,8 +364,7 @@ func args(qj *models.QueuedJob, byteptr *[]byte) []interface{} {
 		&qj.RunAfter,
 		&qj.ExpiresAt,
 		&qj.Status,
-		// can't scan into Data because of https://github.com/golang/go/issues/13905
-		byteptr,
+		&qj.Data,
 		&qj.CreatedAt,
 		&qj.UpdatedAt,
 	}
