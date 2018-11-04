@@ -73,14 +73,15 @@
   version = "2.1"
 
 [[projects]]
-  digest = "1:b03f4259168b54b49f9c16b90695d5802972a87930d1f607a8d12f9d0e06f45c"
+  branch = "master"
+  digest = "1:7cefc4f7f6a411c2598d3344563e4d23fd4e4d88fd1591831fe39cccff41ad28"
   name = "github.com/lib/pq"
   packages = [
     ".",
     "oid",
   ]
   pruneopts = "UT"
-  revision = "3cd0097429be7d611bb644ef85b42bfb102ceea4"
+  revision = "9eb73efc1fcc404148b56765b0d3f61d9a5ef8ee"
 
 [[projects]]
   digest = "1:c658e84ad3916da105a761660dcaeb01e63416c8ec7bc62256a9b411a05fcd67"
