@@ -44,13 +44,6 @@ func testCreateInvalidFields(t *testing.T) {
 	test.AssertEquals(t, err.Error(), "Invalid delivery_strategy: \"foo\"")
 }
 
-var sampleJob = models.Job{
-	Name:             "email-signup",
-	DeliveryStrategy: models.StrategyAtLeastOnce,
-	Attempts:         3,
-	Concurrency:      1,
-}
-
 func newJob(t *testing.T) models.Job {
 	t.Helper()
 	id := types.GenerateUUID("jobname_")
@@ -81,6 +74,7 @@ func testGet(t *testing.T) {
 	_, err := jobs.Create(j0)
 	test.AssertNotError(t, err, "")
 	j, err := jobs.Get(j0.Name)
+	test.AssertNotError(t, err, "")
 	test.AssertEquals(t, j.Name, j0.Name)
 	test.AssertEquals(t, j.DeliveryStrategy, models.StrategyAtLeastOnce)
 	test.AssertEquals(t, j.Attempts, uint8(3))

@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/kevinburke/go-simple-metrics"
+	metrics "github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/archived_jobs"
 	"github.com/kevinburke/rickover/models/db"
@@ -23,7 +23,7 @@ var activeQueriesStmt *sql.Stmt
 
 func prepare() (err error) {
 	if !db.Connected() {
-		return errors.New("No DB connection was established, can't query")
+		return errors.New("setup: no DB connection was established, can't query")
 	}
 
 	activeQueriesStmt, err = db.Conn.Prepare(`-- setup.GetActiveQueries
@@ -41,7 +41,7 @@ func GetActiveQueries() (count int64, err error) {
 // TODO all of these should use a different database connection than the server
 // or the worker, to avoid contention.
 func MeasureActiveQueries(interval time.Duration) {
-	for _ = range time.Tick(interval) {
+	for range time.Tick(interval) {
 		count, err := GetActiveQueries()
 		if err == nil {
 			go metrics.Measure("active_queries.count", count)
@@ -52,7 +52,7 @@ func MeasureActiveQueries(interval time.Duration) {
 }
 
 func MeasureQueueDepth(interval time.Duration) {
-	for _ = range time.Tick(interval) {
+	for range time.Tick(interval) {
 		allCount, readyCount, err := queued_jobs.CountReadyAndAll()
 		if err == nil {
 			go metrics.Measure("queue_depth.all", int64(allCount))
@@ -64,7 +64,7 @@ func MeasureQueueDepth(interval time.Duration) {
 }
 
 func MeasureInProgressJobs(interval time.Duration) {
-	for _ = range time.Tick(interval) {
+	for range time.Tick(interval) {
 		m, err := queued_jobs.GetCountsByStatus(models.StatusInProgress)
 		if err == nil {
 			count := int64(0)
@@ -93,10 +93,10 @@ func DB(connector db.Connector, dbConns int) error {
 	conn, err := connector.Connect(dbConns)
 	db.Conn = conn
 	if err != nil {
-		return errors.New("Could not establish a database connection: " + err.Error())
+		return errors.New("setup: could not establish a database connection: " + err.Error())
 	}
 	if err := db.Conn.Ping(); err != nil {
-		return errors.New("Could not establish a database connection: " + err.Error())
+		return errors.New("setup: could not establish a database connection: " + err.Error())
 	}
 	return PrepareAll()
 }

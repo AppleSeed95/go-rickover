@@ -105,6 +105,7 @@ func Test400EmptyBody(t *testing.T) {
 	w := httptest.NewRecorder()
 	var v interface{}
 	err := json.Unmarshal([]byte("{}"), &v)
+	test.AssertNotError(t, err, "")
 	b := new(bytes.Buffer)
 	json.NewEncoder(b).Encode(v)
 	ssa, server := newSSAServer()

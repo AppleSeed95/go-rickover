@@ -25,7 +25,7 @@ var getAllJobStmt *sql.Stmt
 // Setup prepares all database queries in this package.
 func Setup() (err error) {
 	if !db.Connected() {
-		return errors.New("No database connection, bailing")
+		return errors.New("jobs: no database connection, bailing")
 	}
 
 	if insertJobStmt != nil {

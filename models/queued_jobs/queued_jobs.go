@@ -17,7 +17,7 @@ import (
 const Prefix = "job_"
 
 // ErrNotFound indicates that the job was not found.
-var ErrNotFound = errors.New("Queued job not found")
+var ErrNotFound = errors.New("queued_jobs: job not found")
 
 // UnknownOrArchivedError is raised when the job type is unknown or the job has
 // already been archived. It's unfortunate we can't distinguish these, but more
@@ -48,7 +48,7 @@ var StuckJobLimit = 100
 
 func Setup() (err error) {
 	if !db.Connected() {
-		return errors.New("No DB connection was established, can't query")
+		return errors.New("queued_jobs: no DB connection was established, can't query")
 	}
 
 	if enqueueStmt != nil {
@@ -214,7 +214,7 @@ func Delete(id types.PrefixUUID) error {
 		return nil
 	} else {
 		// This should not be possible because of database constraints
-		return fmt.Errorf("Multiple rows (%d) deleted for job %s, please investigate", rows, id)
+		return fmt.Errorf("queued_jobs: multiple rows (%d) deleted for job %s, please investigate", rows, id)
 	}
 }
 

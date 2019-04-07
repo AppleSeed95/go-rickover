@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/kevinburke/go-simple-metrics"
+	metrics "github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/go-types"
 	"github.com/kevinburke/rest"
 	"github.com/kevinburke/rickover/models"
@@ -23,8 +23,8 @@ func replayHandler() http.Handler {
 		// first capturing group is /:name, 2nd is the name
 		name := replayRoute.FindStringSubmatch(r.URL.Path)[2]
 		idStr := replayRoute.FindStringSubmatch(r.URL.Path)[3]
-		id, wroteResponse := getId(w, r, idStr)
-		if wroteResponse == true {
+		id, done := getId(w, r, idStr)
+		if done {
 			return
 		}
 

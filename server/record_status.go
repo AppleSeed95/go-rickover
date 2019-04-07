@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/kevinburke/go-simple-metrics"
+	metrics "github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/rest"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/queued_jobs"
@@ -65,8 +65,8 @@ func (j *jobStatusUpdater) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	name := jobIdRoute.FindStringSubmatch(r.URL.Path)[1]
 	idStr := jobIdRoute.FindStringSubmatch(r.URL.Path)[2]
-	id, wroteResponse := getId(w, r, idStr)
-	if wroteResponse == true {
+	id, done := getId(w, r, idStr)
+	if done {
 		return
 	}
 	if jsr.Retryable == nil {

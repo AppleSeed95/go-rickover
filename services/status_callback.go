@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/kevinburke/go-dberror"
-	"github.com/kevinburke/go-simple-metrics"
+	metrics "github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/go-types"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/archived_jobs"
@@ -50,7 +50,7 @@ func HandleStatusCallback(id types.PrefixUUID, name string, status models.JobSta
 		}
 		return err
 	} else {
-		return fmt.Errorf("Unknown job status: %s", status)
+		return fmt.Errorf("services: unknown job status: %s", status)
 	}
 }
 
@@ -90,7 +90,7 @@ func getRunAfter(totalAttempts, remainingAttempts uint8) time.Time {
 
 func handleFailedCallback(id types.PrefixUUID, name string, attempt uint8, retryable bool) error {
 	remainingAttempts := attempt - 1
-	if retryable == false || remainingAttempts == 0 {
+	if !retryable || remainingAttempts == 0 {
 		return createAndDelete(id, name, models.StatusFailed, remainingAttempts)
 	}
 	job, err := jobs.GetRetry(name, 3)

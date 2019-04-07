@@ -286,7 +286,7 @@ func TestDecrementDecrements(t *testing.T) {
 	qj, err := queued_jobs.Decrement(qj.ID, 7, time.Now().Add(1*time.Minute))
 	test.AssertNotError(t, err, "")
 	test.AssertEquals(t, qj.Attempts, uint8(6))
-	test.AssertBetween(t, int64(qj.RunAfter.Sub(time.Now())), int64(59*time.Second), int64(1*time.Minute))
+	test.AssertBetween(t, int64(time.Until(qj.RunAfter)), int64(59*time.Second), int64(1*time.Minute))
 }
 
 func TestDecrementErrNoRowsWrongAttempts(t *testing.T) {

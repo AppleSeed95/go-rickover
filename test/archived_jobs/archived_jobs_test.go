@@ -13,13 +13,6 @@ import (
 	"github.com/kevinburke/rickover/test/factory"
 )
 
-var sampleJob = models.Job{
-	Name:             "echo",
-	DeliveryStrategy: models.StrategyAtLeastOnce,
-	Attempts:         3,
-	Concurrency:      1,
-}
-
 func TestAll(t *testing.T) {
 	test.SetUp(t)
 	defer test.TearDown(t)

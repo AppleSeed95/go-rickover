@@ -17,7 +17,7 @@ import (
 	"time"
 
 	"github.com/kevinburke/go-dberror"
-	"github.com/kevinburke/go-simple-metrics"
+	metrics "github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/go-types"
 	"github.com/kevinburke/rest"
 	"github.com/kevinburke/rickover/config"
@@ -106,7 +106,7 @@ func serverHeaderHandler(h http.Handler) http.Handler {
 // forbidNonTLSTrafficHandler returns a 403 to traffic that is sent via a proxy
 func forbidNonTLSTrafficHandler(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if disallowUnencryptedRequests == true {
+		if disallowUnencryptedRequests {
 			if r.Header.Get("X-Forwarded-Proto") == "http" {
 				// It should always be set, but if it's not, let the request
 				// through.
@@ -160,8 +160,9 @@ func debugRequestBodyHandler(h http.Handler) http.Handler {
 			h.ServeHTTP(res, r)
 
 			_, _ = b.WriteString(fmt.Sprintf("HTTP/1.1 %d\r\n", res.Code))
-			_ = res.HeaderMap.Write(b)
-			for k, v := range res.HeaderMap {
+			result := res.Result()
+			_ = result.Header.Write(b)
+			for k, v := range result.Header {
 				w.Header()[k] = v
 			}
 			w.WriteHeader(res.Code)
@@ -347,8 +348,8 @@ func (j *jobStatusGetter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		idStr = jobIdMatch[2]
 	}
 
-	id, wroteResponse := getId(w, r, idStr)
-	if wroteResponse == true {
+	id, done := getId(w, r, idStr)
+	if done {
 		return
 	}
 	qj, err := queued_jobs.GetRetry(id, 3)
@@ -437,7 +438,7 @@ func (j *jobEnqueuer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	} else {
 		var wroteResponse bool
 		id, wroteResponse = getId(w, r, idStr)
-		if wroteResponse == true {
+		if wroteResponse {
 			return
 		}
 	}

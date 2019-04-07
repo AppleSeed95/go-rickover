@@ -39,7 +39,7 @@ func ArchiveStuckJobs(olderThan time.Duration) error {
 // in-progress jobs that haven't been updated in oldDuration time), and marks
 // them as failed.
 func WatchStuckJobs(interval time.Duration, olderThan time.Duration) {
-	for _ = range time.Tick(interval) {
+	for range time.Tick(interval) {
 		go func() {
 			err := ArchiveStuckJobs(olderThan)
 			if err != nil {

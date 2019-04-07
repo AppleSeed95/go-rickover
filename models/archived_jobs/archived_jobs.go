@@ -18,7 +18,7 @@ import (
 const Prefix = "job_"
 
 // ErrNotFound indicates that the archived job was not found.
-var ErrNotFound = errors.New("Archived job not found")
+var ErrNotFound = errors.New("archived_jobs: job not found")
 
 var createStmt *sql.Stmt
 var getStmt *sql.Stmt
@@ -26,7 +26,7 @@ var getStmt *sql.Stmt
 // Setup prepares all database statements.
 func Setup() (err error) {
 	if !db.Connected() {
-		return errors.New("No DB connection was established, can't query")
+		return errors.New("archived_jobs: no DB connection was established, can't query")
 	}
 
 	if createStmt != nil {

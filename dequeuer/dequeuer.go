@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/kevinburke/go-dberror"
-	"github.com/kevinburke/go-simple-metrics"
+	metrics "github.com/kevinburke/go-simple-metrics"
 	"github.com/kevinburke/rickover/models"
 	"github.com/kevinburke/rickover/models/jobs"
 	"github.com/kevinburke/rickover/models/queued_jobs"
@@ -124,7 +124,7 @@ type Worker interface {
 // Dequeuer will do with a dequeued job.
 func (p *Pool) AddDequeuer(w Worker) error {
 	if p.receivedShutdownSignal {
-		return poolShutdown
+		return errPoolShutdown
 	}
 	p.mu.Lock()
 	defer p.mu.Unlock()
@@ -139,8 +139,8 @@ func (p *Pool) AddDequeuer(w Worker) error {
 	return nil
 }
 
-var emptyPool = errors.New("No workers left to dequeue")
-var poolShutdown = errors.New("Cannot add worker because the pool is shutting down")
+var errEmptyPool = errors.New("dequeuer: no workers left to dequeue")
+var errPoolShutdown = errors.New("dequeuer: cannot add worker because the pool is shutting down")
 
 // RemoveDequeuer removes a dequeuer from the pool and sends that dequeuer
 // a shutdown signal.
@@ -148,7 +148,7 @@ func (p *Pool) RemoveDequeuer(ctx context.Context) error {
 	p.mu.Lock()
 	defer p.mu.Unlock()
 	if len(p.Dequeuers) == 0 {
-		return emptyPool
+		return errEmptyPool
 	}
 	dq := p.Dequeuers[0]
 	p.Dequeuers = append(p.Dequeuers[:0], p.Dequeuers[1:]...)

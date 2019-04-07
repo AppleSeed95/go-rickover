@@ -22,11 +22,11 @@ func GetInt(varName string) (int, error) {
 func GetURLOrBail(urlEnvVar string) *url.URL {
 	downstreamUrl := os.Getenv(urlEnvVar)
 	if downstreamUrl == "" {
-		log.Fatal(fmt.Errorf("No downstream URL configured. Please set %s", urlEnvVar))
+		log.Fatal(fmt.Errorf("config: no downstream URL configured. please set %s", urlEnvVar))
 	}
 	parsedUrl, err := url.Parse(downstreamUrl)
 	if err != nil {
-		log.Fatalf("Invalid downstream url: %s. %s\n", downstreamUrl, err.Error())
+		log.Fatalf("config: invalid downstream url: %s. %s\n", downstreamUrl, err.Error())
 	}
 	return parsedUrl
 }

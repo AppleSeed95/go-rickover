@@ -29,15 +29,6 @@ func new404(r *http.Request) *rest.Error {
 	}
 }
 
-func new403(r *http.Request) *rest.Error {
-	return &rest.Error{
-		Title:    "Username or password are invalid. Please double check your credentials",
-		ID:       "forbidden",
-		Instance: r.URL.Path,
-		Status:   403,
-	}
-}
-
 func insecure403(r *http.Request) *rest.Error {
 	return &rest.Error{
 		Title:    "Server not available over HTTP",

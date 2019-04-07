@@ -57,7 +57,7 @@ func (j *JobStatus) Scan(src interface{}) error {
 		*j = JobStatus(string(txt))
 		return nil
 	}
-	return fmt.Errorf("Unsupported JobStatus: %#v", src)
+	return fmt.Errorf("models: unsupported JobStatus: %#v", src)
 }
 
 // Value implements the driver.Valuer interface.
@@ -76,5 +76,5 @@ func (d *DeliveryStrategy) Scan(src interface{}) error {
 		*d = DeliveryStrategy(string(txt))
 		return nil
 	}
-	return fmt.Errorf("Unsupported DeliveryStrategy: %#v", src)
+	return fmt.Errorf("models: unsupported DeliveryStrategy: %#v", src)
 }

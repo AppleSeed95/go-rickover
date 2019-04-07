@@ -25,7 +25,7 @@ func TestAll(t *testing.T) {
 	t.Run("Parallel", func(t *testing.T) {
 		t.Run("TestWorkerShutsDown", testWorkerShutsDown)
 		t.Run("TestWorkerMakesCorrectRequest", testWorkerMakesCorrectRequest)
-		t.Run("TestWorkerMakesExactlyOneRequest", testWorkerMakesCorrectRequest)
+		t.Run("TestWorkerMakesExactlyOneRequest", testWorkerMakesExactlyOneRequest)
 	})
 }
 

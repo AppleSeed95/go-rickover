@@ -17,14 +17,15 @@ func Test400EmptyStatusBody(t *testing.T) {
 	t.Parallel()
 	w := httptest.NewRecorder()
 	var v interface{}
-	err := json.Unmarshal([]byte("{}"), &v)
+	jsonErr := json.Unmarshal([]byte("{}"), &v)
+	test.AssertNotError(t, jsonErr, "")
 	b := new(bytes.Buffer)
 	json.NewEncoder(b).Encode(v)
 	req, _ := http.NewRequest("POST", "/v1/jobs/echo/job_123", b)
 	jsserver.ServeHTTP(w, req)
 	test.AssertEquals(t, w.Code, http.StatusBadRequest)
 	var e rest.Error
-	err = json.Unmarshal(w.Body.Bytes(), &e)
+	err := json.Unmarshal(w.Body.Bytes(), &e)
 	test.AssertNotError(t, err, "")
 	test.AssertEquals(t, e.Title, "Missing required field: status")
 	test.AssertEquals(t, e.ID, "missing_parameter")
