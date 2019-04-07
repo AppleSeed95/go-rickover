@@ -14,19 +14,24 @@ BENCHSTAT := $(GOPATH)/bin/benchstat
 BUMP_VERSION := $(GOPATH)/bin/bump_version
 GODOCDOC := $(GOPATH)/bin/godocdoc
 GOOSE := $(GOPATH)/bin/goose
+STATICCHECK := $(GOPATH)/bin/staticcheck
 TRUNCATE_TABLES := $(GOPATH)/bin/rickover-truncate-tables
 
 # Just run it every time, we could get fancy with find() tricks, but eh.
 $(TRUNCATE_TABLES):
 	go install ./test/rickover-truncate-tables
 
+$(STATICCHECK):
+	go get -u honnef.co/go/tools/cmd/staticcheck
+
 test-install:
 	-createuser rickover --superuser --createrole --createdb --inherit
 	-createdb rickover --owner=rickover
 	-createdb rickover_test --owner=rickover
 
-lint:
+lint: | $(STATICCHECK)
 	go list ./... | grep -v vendor | xargs go vet
+	$(STATICCHECK) ./...
 
 build:
 	go build ./...
