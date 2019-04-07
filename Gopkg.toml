@@ -20,4 +20,4 @@
 
 [[constraint]]
   name = "github.com/lib/pq"
-  branch = "master"
+  version = "v1.0.0"
