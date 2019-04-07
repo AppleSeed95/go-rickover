@@ -5,9 +5,10 @@ go:
   - 1.9.x
   - 1.10.x
   - 1.11.x
+  - 1.12.x
   - master
 
-dist: trusty
+dist: xenial
 sudo: false
 
 script: make lint race-test bench
@@ -22,7 +23,7 @@ env:
     - TZ=UTC
 
 addons:
-  postgresql: "9.6"
+  postgresql: "10"
 
 services:
   - postgresql
